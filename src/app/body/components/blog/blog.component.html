@@ -1,0 +1,14 @@
+<div class="container">
+    <section class="blog-heading">
+        <div class="row">
+            <div class="col-12 mt-5">
+                <h1>Share your thoughts!</h1>
+                <p>this is the best makeup blog to share, review, and write about the latest makeup trends and products!</p>
+                <p><a class="btn btn-primary" routerLink="/add-post">Add New Post</a></p>
+            </div>
+        </div>
+    </section>
+</div>
+<div *ngFor="let post of myPosts">
+    <post [post]="post"></post>
+</div>

@@ -1,0 +1,30 @@
+<main class="mh-900">
+    <div class="container">
+        <section id="signin-to-digg">
+            <div class="row">
+                <div class="col-12 mt-5">
+                    <h2>Please Sign In:</h2>
+                    <br>
+                </div>
+            </div>
+        </section>
+        <section id="signin-form-content">
+            <div class="row">
+                <div class="col-lg-6">
+                    <form id="signin-form" novalidate="novalidate">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="signInClick()" routerLink="/blog">Submit</button>
+                        <span class="text-danger"></span>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

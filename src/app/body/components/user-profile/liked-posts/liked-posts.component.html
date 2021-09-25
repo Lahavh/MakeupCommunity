@@ -1,0 +1,13 @@
+<div class="container">
+  <section class="liked-posts-heading">
+    <div class="row">
+      <div class="col-12 mt-5 text-center">
+        <h1>Posts That I Liked</h1>
+      </div>
+    </div>
+  </section>
+
+  <div *ngFor="let post of (likedPosts$ | async)">
+    <post [post]="post"></post>
+  </div>
+</div>

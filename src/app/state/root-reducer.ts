@@ -23,15 +23,23 @@ export function rootReducer(state: AppState, action: Action): AppState {
             };
         }
         case "DISLIKE_POST": {
-            const postIndex = state.activeUser.likedPosts.indexOf(action.payload);
-            state.activeUser.likedPosts.splice(postIndex, 1);
+            // const postIndex = state.activeUser.likedPosts.indexOf(action.payload);
+            // state.activeUser.likedPosts.splice(postIndex, 1);
+            // return {
+            //     ...state, activeUser: {
+            //         ...state.activeUser, likedPosts: [
+            //             ...state.activeUser.likedPosts
+            //         ]
+            //     }
+            // };
+
+
             return {
                 ...state, activeUser: {
-                    ...state.activeUser, likedPosts: [
-                        ...state.activeUser.likedPosts
-                    ]
+                    ...state.activeUser, likedPosts: state.activeUser.likedPosts.filter(currentPost => currentPost.id !== action.payload.id)
                 }
             };
+
         }
 
         default: {

@@ -44,6 +44,6 @@ import { LikedPostsComponent } from './body/components/user-profile/liked-posts/
 })
 export class AppModule { 
   constructor(private ngRedux: NgRedux<AppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE, [createLogger()]);
+    ngRedux.configureStore(rootReducer, INITIAL_STATE, [createLogger({diff: true, collapsed: true})]);
   }
 }

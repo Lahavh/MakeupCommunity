@@ -1,0 +1,38 @@
+<main class="mh-900">
+  <div class="container">
+    <section id="the-post">
+      <div class="row">
+        <div class="col-12 mt-3">
+          <div class="card">
+            <div class="card-header">
+              <span>
+                <img width="40" class="rounded-circle" src="" alt="User profile image">
+              </span>
+              <span class="ms-2"></span>
+              <span class="float-end"></span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <p class="card-text">{{post.body}}</p>
+              <div class="post-buttons">
+                <div class="dropdown float-right mb-2">
+                  <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-h"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Edit</a>
+                    <a class="dropdown-item" href="#">Delete</a>
+                  </div>
+                </div>
+                <div class="heart-div float-right" (click)="likePost()">
+                  <i [ngClass]="isLiked ? 'fas fa-heart' : 'far fa-heart'"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

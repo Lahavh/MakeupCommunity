@@ -9,6 +9,5 @@ export class User {
     likedPosts: Post[];
 
     constructor() {
-
     }
 }

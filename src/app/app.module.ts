@@ -17,6 +17,7 @@ import { UserProfileComponent } from './body/components/user-profile/user-profil
 import { AddPostComponent } from './body/components/blog/add-post/add-post.component';
 import { FormsModule } from '@angular/forms';
 import { LikedPostsComponent } from './body/components/user-profile/liked-posts/liked-posts.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LikedPostsComponent } from './body/components/user-profile/liked-posts/
     AppRoutingModule,
     NgReduxModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { User } from '../body/components/user-profile/user.class';
 import { AppState } from '../state/app-state';
 
 @Component({
@@ -8,20 +9,11 @@ import { AppState } from '../state/app-state';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.less']
 })
-export class NavbarComponent implements OnInit/*, OnDestroy*/ {
+export class NavbarComponent implements OnInit {
 
+  @select(state => state.activeUser) activeUser$: Observable<User>;
 
-  @select(state => state.isUserSignedIn) isUserSignedIn$: Observable<boolean>;
-  //isUserSIgnedIn: boolean;
-  //sub: Subscription;
-
-  constructor(private ngRedux: NgRedux<AppState>) { 
-    //this.sub = this.isUserSignedIn$.subscribe(isUserSignedInFromState => this.isUserSIgnedIn = isUserSignedInFromState);
-  }
-
-  // ngOnDestroy(): void {
-  //   this.sub.unsubscribe();
-  // }
+  constructor(private ngRedux: NgRedux<AppState>) {}
 
   ngOnInit(): void {
   }
@@ -29,5 +21,4 @@ export class NavbarComponent implements OnInit/*, OnDestroy*/ {
   onLogout() {
     this.ngRedux.dispatch({type: "LOG_OUT"});
   }
-
 }

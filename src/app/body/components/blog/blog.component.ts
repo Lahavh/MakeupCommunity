@@ -9,21 +9,12 @@ import { Post } from './post/post.class';
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.less']
 })
-export class BlogComponent implements OnInit, OnDestroy {
+export class BlogComponent implements OnInit {
+  
+  @select(state => state.activeUser) activeUser$: Observable<User>;
+  @select(state => state.blog.posts) allPosts$: Observable<Post[]>;
 
-  @select(state => state.activeUser.myPosts) myPosts$: Observable<Post[]>;
-  public myPosts: Post[];
-  private subscription: Subscription;
+  constructor() {}
 
-  constructor() {
-    this.subscription = this.myPosts$.subscribe(myPostsFromState => this.myPosts = myPostsFromState);
-  }
-
-  ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
+  ngOnInit() {}
 }

@@ -19,14 +19,9 @@ export class SignUpComponent implements OnInit {
   }
 
   signUpClick() {
-
+    const userToSave = new User(this.name, this.email, this.password);
     this.http.post(
-      "http://localhost:5555/user", 
-      {
-        name: this.name,
-        email: this.email,
-        password: this.password
-      }).subscribe();
+      "http://localhost:5555/user", userToSave).subscribe();
   }
 
 }

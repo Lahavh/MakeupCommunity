@@ -1,14 +1,23 @@
 <div class="container">
-    <section class="blog-heading">
-        <div class="row">
-            <div class="col-12 mt-5">
-                <h1>Share your thoughts!</h1>
-                <p>this is the best makeup blog to share, review, and write about the latest makeup trends and products!</p>
-                <p><a class="btn btn-primary" routerLink="/add-post">Add New Post</a></p>
+    <div *ngIf="(activeUser$ | async)" class= "displayIfActive">
+        <div class="col-12 mt-5">
+            <section class="blog-heading">
+                <div class="row">
+                    <div class="col-12 mt-5">
+                        <h1>Share your thoughts!</h1>
+                        <p>this is the best makeup blog to share, review, and write about the latest makeup trends and products!</p>
+                        <p><a class="btn btn-primary" routerLink="/add-post">Add New Post</a></p>
+                    </div>
+                </div>
+            </section>
+            <div *ngFor="let post of (allPosts$ | async)">
+                <post [post]="post"></post>
             </div>
         </div>
-    </section>
+    </div>
+
+    <div *ngIf="!(activeUser$ | async)" class= "displayIfNotActive col-12 mt-5">
+        <p>Please Sign In To View Posts</p>
+    </div> 
 </div>
-<div *ngFor="let post of myPosts">
-    <post [post]="post"></post>
-</div>
+

@@ -1,4 +1,3 @@
-import { User } from "../../user-profile/user.class";
 import { v4 as uuidv4 } from "uuid";
 
 
@@ -7,13 +6,13 @@ export class Post {
     title: string;
     body: string;
     timestamp: Date;
-    author: User;
+    authorId: string;
 
-    constructor(title: string, body: string, author: User) {
+    constructor(title: string, body: string, authorId: string) {
         this.id = uuidv4();
         this.title = title;
         this.body = body;
         this.timestamp = new Date();
-        this.author = author;
+        this.authorId = authorId;
     }
 }

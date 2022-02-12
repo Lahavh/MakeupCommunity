@@ -12,9 +12,6 @@ import { Post } from '../post/post.class';
 })
 export class AddPostComponent implements OnInit {
 
-  public postTitle: string;
-  public postArticle: string;
-
   constructor(
     private ngRedux: NgRedux<AppState>,
     private http: HttpClient
@@ -22,9 +19,7 @@ export class AddPostComponent implements OnInit {
 
   ngOnInit() {}
 
-  addNewPost() {
-    const postToSave = new Post(this.postTitle, this.postArticle, this.ngRedux.getState().activeUser.id);
-
+  addNewPost(postToSave: Post) {
     this.http.post(
       "http://localhost:5555/post", postToSave).subscribe(_ => {
         this.http.put("http://localhost:5555/post", postToSave).subscribe(_ => {

@@ -1,0 +1,25 @@
+<main class="mh-900">
+  <div class="container">
+    <section id="new-post-form">
+      <div class="row">
+        <div class="col-lg-6">
+          <form action="" method="POST" autocomplete="off" novalidate="novalidate">
+            <div class="mb-3">
+              <label for="title" class="form-label">* Title</label>
+              <input type="text" class="form-control" id="title" name="title" value="" [(ngModel)]="postTitle">
+            </div>
+            <div class="mb-3">
+              <label for="article" class="form-label">* Article</label>
+              <textarea class="form-control" name="article" id="article" cols="30" rows="10"
+                [(ngModel)]="postArticle"></textarea>
+              <span class="text-danger"></span>
+            </div>
+            <button type="button" name="submit" class="btn btn-primary mr-2" routerLink="/blog"
+              (click)="submitPost()">Submit</button>
+            <a class="btn btn-secondary" routerLink="/blog">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

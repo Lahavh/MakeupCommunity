@@ -1,5 +1,6 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AppState } from 'src/app/state/app-state';
 import { User } from '../../user-profile/user.class';
@@ -19,7 +20,7 @@ export class PostComponent implements OnInit, OnDestroy {
   public isLiked: boolean;
   private subscription: Subscription;
 
-  constructor(private ngRedux: NgRedux<AppState>) {
+  constructor(private ngRedux: NgRedux<AppState>, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -33,7 +34,6 @@ export class PostComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe()
   }
 
-
   likePost() {
     if (!this.isLiked) {
       this.ngRedux.dispatch({ type: "LIKE_POST", payload: this.post });
@@ -41,5 +41,9 @@ export class PostComponent implements OnInit, OnDestroy {
     else {
       this.ngRedux.dispatch({ type: "DISLIKE_POST", payload: this.post });
     }
+  }
+
+  editPost() {
+    this.router.navigate(["/edit-post", { post: this.post }]);
   }
 }

@@ -7,6 +7,8 @@ import { SignInComponent } from './body/components/sign-in/sign-in.component';
 import { UserProfileComponent } from './body/components/user-profile/user-profile.component';
 import { AddPostComponent } from './body/components/blog/add-post/add-post.component';
 import { LikedPostsComponent } from './body/components/user-profile/liked-posts/liked-posts.component';
+import { EditPostComponent } from './body/components/blog/edit-post/edit-post.component';
+import { Post } from './body/components/blog/post/post.class';
 
 const routes: Routes = [
   {
@@ -20,6 +22,11 @@ const routes: Routes = [
   {
     path: "add-post",
     component: AddPostComponent
+  },
+  {
+    path: "edit-post",
+    component: EditPostComponent,
+    data: { post: Post }
   },
   {
     path: "sign-in",

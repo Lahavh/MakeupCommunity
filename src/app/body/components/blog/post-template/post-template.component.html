@@ -6,12 +6,12 @@
           <form action="" method="POST" autocomplete="off" novalidate="novalidate">
             <div class="mb-3">
               <label for="title" class="form-label">* Title</label>
-              <input type="text" class="form-control" id="title" name="title" value="" [(ngModel)]="postTitle">
+              <input type="text" class="form-control" id="title" name="title" value="" [(ngModel)]="post['title']">
             </div>
             <div class="mb-3">
               <label for="article" class="form-label">* Article</label>
               <textarea class="form-control" name="article" id="article" cols="30" rows="10"
-                [(ngModel)]="postArticle"></textarea>
+                [(ngModel)]="post['body']"></textarea>
               <span class="text-danger"></span>
             </div>
             <button type="button" name="submit" class="btn btn-primary mr-2" routerLink="/blog"

@@ -8,6 +8,6 @@
         </div>
       </div>
     </section>
-    <post-template (submit)="editPost($event)"></post-template>
+    <post-template [post]="post" (submit)="editPost($event)"></post-template>
   </div>
 </main>

@@ -32,7 +32,12 @@ export function rootReducer(state: AppState, action: Action): AppState {
                     ...state.activeUser, likedPosts: state.activeUser.likedPosts.filter(currentPost => currentPost.id !== action.payload.id)
                 }
             };
-
+        }
+        case "EDIT_POST": {
+            return {
+                ...state,
+                currentEditingPost: action.payload
+            };
         }
 
         default: {

@@ -22,9 +22,7 @@ export class AddPostComponent implements OnInit {
   addNewPost(postToSave: Post) {
     this.http.post(
       "http://localhost:5555/post", postToSave).subscribe(_ => {
-        this.http.put("http://localhost:5555/post", postToSave).subscribe(_ => {
-          this.ngRedux.dispatch({ type: "ADD_NEW_POST", payload: postToSave });
-        });
+        this.ngRedux.dispatch({ type: "ADD_NEW_POST", payload: postToSave });
       });
   }
 }

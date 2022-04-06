@@ -12,18 +12,17 @@ export class PostTemplateComponent implements OnInit {
 
   @Input() post: Post;
 
-  public postTitle: string;
-  public postArticle: string;
-
   @Output() submit: EventEmitter<Post> = new EventEmitter<Post>();
 
   constructor(private ngRedux: NgRedux<AppState>) { }
 
   ngOnInit() {
+    if (!this.post) {
+      this.post = new Post("", "", this.ngRedux.getState().activeUser.id);
+    }
   }
 
   submitPost() {
-    const postToSave = new Post(this.postTitle, this.postArticle, this.ngRedux.getState().activeUser.id);
-    this.submit.emit(postToSave);
+    this.submit.emit(this.post);
   }
 }

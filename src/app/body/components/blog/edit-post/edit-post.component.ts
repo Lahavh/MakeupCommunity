@@ -1,5 +1,7 @@
+import { NgRedux } from '@angular-redux/store';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AppState } from 'src/app/state/app-state';
 import { Post } from '../post/post.class';
 
 @Component({
@@ -11,13 +13,18 @@ export class EditPostComponent implements OnInit {
 
   public post: Post;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private ngRedux: NgRedux<AppState>, 
+    private http: HttpClient
+    ) { }
 
   ngOnInit() {
-    this.route.data.subscribe(data => console.log("lalala ", data));   //need to find a way to get the post data from the router
+    this.post = this.ngRedux.getState().currentEditingPost;
   }
 
   editPost(postToEdit: Post) {
-    console.log("helloooo ", postToEdit);
+    this.http.put(
+      "http://localhost:5555/edit-post", postToEdit).subscribe(_ => {
+      });
   }
 }

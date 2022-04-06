@@ -1,4 +1,5 @@
 import { NgRedux, select } from '@angular-redux/store';
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -20,7 +21,10 @@ export class PostComponent implements OnInit, OnDestroy {
   public isLiked: boolean;
   private subscription: Subscription;
 
-  constructor(private ngRedux: NgRedux<AppState>, private router: Router) {
+  constructor(
+    private ngRedux: NgRedux<AppState>, 
+    private router: Router,
+    private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -36,14 +40,22 @@ export class PostComponent implements OnInit, OnDestroy {
 
   likePost() {
     if (!this.isLiked) {
-      this.ngRedux.dispatch({ type: "LIKE_POST", payload: this.post });
+      this.http.put(
+        "http://localhost:5555/like-post", { userId: this.ngRedux.getState().activeUser.id, postId: this.post.id }).subscribe(_ => {
+          console.log("SECCEEDED!");
+          this.ngRedux.dispatch({ type: "LIKE_POST", payload: this.post });
+        });
     }
-    else {
-      this.ngRedux.dispatch({ type: "DISLIKE_POST", payload: this.post });
+    else {    
+      this.http.put(
+        "http://localhost:5555/dislike-post", { userId: this.ngRedux.getState().activeUser.id, postId: this.post.id }).subscribe(_ => {
+          this.ngRedux.dispatch({ type: "DISLIKE_POST", payload: this.post });
+        });
     }
   }
 
   editPost() {
-    this.router.navigate(["/edit-post", { post: this.post }]);
+    this.ngRedux.dispatch({ type: "EDIT_POST", payload: this.post });
+    this.router.navigate(["/edit-post"]);
   }
 }

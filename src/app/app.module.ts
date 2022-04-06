@@ -20,6 +20,7 @@ import { LikedPostsComponent } from './body/components/user-profile/liked-posts/
 import { HttpClientModule } from '@angular/common/http';
 import { EditPostComponent } from './body/components/blog/edit-post/edit-post.component';
 import { PostTemplateComponent } from './body/components/blog/post-template/post-template.component';
+import { DeleteModalComponent } from './body/components/blog/delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PostTemplateComponent } from './body/components/blog/post-template/post
     AddPostComponent,
     LikedPostsComponent,
     EditPostComponent,
-    PostTemplateComponent
+    PostTemplateComponent,
+    DeleteModalComponent
   ],
   imports: [
     BrowserModule,
@@ -43,13 +45,16 @@ import { PostTemplateComponent } from './body/components/blog/post-template/post
     NgReduxModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DeleteModalComponent,
+  ],
 })
 export class AppModule {
   constructor(private ngRedux: NgRedux<AppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE, [createLogger({ diff: true, collapsed: true })]);
+    this.ngRedux.configureStore(rootReducer, INITIAL_STATE, [createLogger({ diff: true, collapsed: true })]);
   }
 }

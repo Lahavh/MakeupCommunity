@@ -1,7 +1,9 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { AppState } from 'src/app/state/app-state';
 import { Post } from '../../blog/post/post.class';
+import { User } from '../user.class';
 
 @Component({
   selector: 'app-liked-posts',
@@ -10,10 +12,21 @@ import { Post } from '../../blog/post/post.class';
 })
 export class LikedPostsComponent implements OnInit {
 
-  @select(state => state.activeUser.likedPosts) likedPosts$: Observable<Post[]>;
+  @select(state => state.activeUser) activeUser$: Observable<User>;
 
-  constructor() { }
+  public likedPosts: Post[] = [];
+  private subscription: Subscription;
+
+  constructor(private ngRedux: NgRedux<AppState>) { }
 
   ngOnInit() {
+    this.subscription = this.activeUser$.subscribe(activeUserFromState => {
+      const allPostsFromState = this.ngRedux.getState().blog.posts;
+      activeUserFromState.likedPostsIds.forEach(currentLikedPostId => this.likedPosts.push(allPostsFromState.find(currentPost => currentPost.id === currentLikedPostId)));
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

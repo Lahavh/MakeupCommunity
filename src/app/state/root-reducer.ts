@@ -10,13 +10,13 @@ export function rootReducer(state: AppState, action: Action): AppState {
             return { ...state, activeUser: action.payload };
         }
         case "ADD_NEW_POST": {
-            return { ...state, activeUser: { ...state.activeUser, myPosts: [...state.activeUser.myPosts, action.payload] }, blog: { ...state.blog, posts: [...state.blog.posts, action.payload] } };
+            return { ...state, activeUser: { ...state.activeUser, myPostsIds: [...state.activeUser.myPostsIds, action.payload] }, blog: { ...state.blog, posts: [...state.blog.posts, action.payload] } };
         }
         case "LIKE_POST": {
             return {
                 ...state, activeUser: {
-                    ...state.activeUser, likedPosts: [
-                        ...state.activeUser.likedPosts, action.payload
+                    ...state.activeUser, likedPostsIds: [
+                        ...state.activeUser.likedPostsIds, action.payload
                     ]
                 }
             };
@@ -29,7 +29,7 @@ export function rootReducer(state: AppState, action: Action): AppState {
         case "DISLIKE_POST": {
             return {
                 ...state, activeUser: {
-                    ...state.activeUser, likedPosts: state.activeUser.likedPosts.filter(currentPost => currentPost.id !== action.payload.id)
+                    ...state.activeUser, likedPostsIds: state.activeUser.likedPostsIds.filter(currentPostId => currentPostId !== action.payload)
                 }
             };
         }

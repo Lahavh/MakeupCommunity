@@ -12,7 +12,7 @@
   </div>
 
   <div class="my-posts mb-3">
-    <div *ngFor="let post of (activeUser$ | async).myPosts">
+    <div *ngFor="let post of myPosts">
       <post [post]="post"></post>
     </div>
   </div>

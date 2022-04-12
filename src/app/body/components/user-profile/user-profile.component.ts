@@ -1,6 +1,8 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { AppState } from 'src/app/state/app-state';
+import { Post } from '../blog/post/post.class';
 import { User } from './user.class';
 
 @Component({
@@ -12,9 +14,19 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   @select(state => state.activeUser) activeUser$: Observable<User>;
 
-  constructor() { }
+  public myPosts: Post[] = [];
+  private subscription: Subscription;
 
-  ngOnInit() { }
+  constructor(private ngRedux: NgRedux<AppState>) { }
 
-  ngOnDestroy() { }
+  ngOnInit() {
+    this.subscription = this.activeUser$.subscribe(activeUserFromState => {
+      const allPostsFromState = this.ngRedux.getState().blog.posts;
+      activeUserFromState.myPostsIds.forEach(currentMyPostId => this.myPosts.push(allPostsFromState.find(currentPost => currentPost.id === currentMyPostId)));
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

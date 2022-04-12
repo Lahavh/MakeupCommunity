@@ -7,8 +7,8 @@ export class User {
     email: string;
     password: string;
     profilePicture: string;
-    myPosts: Post[];
-    likedPosts: Post[];
+    myPostsIds: string[];
+    likedPostsIds: string[];
 
     constructor(name: string, email: string, password: string, profilePicture = "") {
         this.id = uuidv4();
@@ -16,7 +16,7 @@ export class User {
         this.email = email;
         this.password = password;
         this.profilePicture = profilePicture;
-        this.myPosts = [];
-        this.likedPosts = [];
+        this.myPostsIds = [];
+        this.likedPostsIds = [];
     }
 }

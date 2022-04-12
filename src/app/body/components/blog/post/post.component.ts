@@ -37,7 +37,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.activeUser$.subscribe(activeUserFromState => {
-      const foundSamePost = activeUserFromState.likedPosts.find(currentPost => currentPost.id === this.post.id);
+      const foundSamePost = activeUserFromState.likedPostsIds.find(currentLikedPostId => currentLikedPostId === this.post.id);
       this.isLiked = foundSamePost ? true : false;
     });
   }
@@ -50,14 +50,13 @@ export class PostComponent implements OnInit, OnDestroy {
     if (!this.isLiked) {
       this.http.put(
         "http://localhost:5555/like-post", { userId: this.ngRedux.getState().activeUser.id, postId: this.post.id }).subscribe(_ => {
-          console.log("SECCEEDED!");
-          this.ngRedux.dispatch({ type: "LIKE_POST", payload: this.post });
+          this.ngRedux.dispatch({ type: "LIKE_POST", payload: this.post.id });
         });
     }
     else {
       this.http.put(
         "http://localhost:5555/dislike-post", { userId: this.ngRedux.getState().activeUser.id, postId: this.post.id }).subscribe(_ => {
-          this.ngRedux.dispatch({ type: "DISLIKE_POST", payload: this.post });
+          this.ngRedux.dispatch({ type: "DISLIKE_POST", payload: this.post.id });
         });
     }
   }

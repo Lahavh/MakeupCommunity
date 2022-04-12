@@ -7,7 +7,7 @@
     </div>
   </section>
 
-  <div *ngFor="let post of (likedPosts$ | async)">
+  <div *ngFor="let post of likedPosts">
     <post [post]="post"></post>
   </div>
 </div>

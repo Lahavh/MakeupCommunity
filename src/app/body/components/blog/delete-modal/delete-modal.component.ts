@@ -7,11 +7,19 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbActiveModal]
 })
 export class DeleteModalComponent implements OnInit {
-  @Input() src;
+
+  @Input()
+  public isActive;
 
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }
 
+  onDeletePost() {
+  }
+
+  onCancel() {
+    this.isActive = false;
+  }
 }

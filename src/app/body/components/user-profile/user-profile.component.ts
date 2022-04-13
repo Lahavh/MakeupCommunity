@@ -14,16 +14,19 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   @select(state => state.activeUser) activeUser$: Observable<User>;
 
-  public myPosts: Post[] = [];
+  public myPosts: Post[];
   private subscription: Subscription;
 
   constructor(private ngRedux: NgRedux<AppState>) { }
 
   ngOnInit() {
     this.subscription = this.activeUser$.subscribe(activeUserFromState => {
+      this.myPosts = [];
       const allPostsFromState = this.ngRedux.getState().blog.posts;
       activeUserFromState.myPostsIds.forEach(currentMyPostId => this.myPosts.push(allPostsFromState.find(currentPost => currentPost.id === currentMyPostId)));
     });
+
+  
   }
 
   ngOnDestroy() {

@@ -2,7 +2,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { AppState } from 'src/app/state/app-state';
 import { User } from '../../user-profile/user.class';
@@ -20,19 +20,17 @@ export class PostComponent implements OnInit, OnDestroy {
 
   @select(state => state.activeUser) activeUser$: Observable<User>;
 
-  @ViewChild("deleteModalTemplateRef") deleteModal: DeleteModalComponent;
-
-  @ViewChild('examplemodal')
-  private modalRef: TemplateRef<any>;
+  // @ViewChild("deleteModalTemplateRef") deleteModal: DeleteModalComponent;
 
   public isLiked: boolean;
   private subscription: Subscription;
+  // private modalRef: NgbModalRef;
 
   constructor(
     private ngRedux: NgRedux<AppState>,
     private router: Router,
-    private http: HttpClient,
-    private modalService: NgbModal) {
+    private http: HttpClient
+    /*private modalService: NgbModal*/) {
   }
 
   ngOnInit(): void {
@@ -66,22 +64,20 @@ export class PostComponent implements OnInit, OnDestroy {
     this.router.navigate(["/edit-post"]);
   }
 
-  openDeleteModal() {
-    this.onModalRequest();
+  deletePost() {
+    this.http.put(
+      "http://localhost:5555/delete-post", { postId: this.post.id }).subscribe(_ => {
+        this.ngRedux.dispatch({ type: "DELETE_POST", payload: this.post.id });
+      });
   }
 
-  onModalRequest() {
-    const modalRef = this.modalService.open(DeleteModalComponent); //Added Modal Component here
-    modalRef.componentInstance.src = "lL";//anything u wish to pass to modal component @Input 
-    modalRef.result.then((result) => {
-      console.log(result);
-      console.log('closed');
-    }).catch((result) => {
-      console.log(result);
-      console.log('cancelling');
-    });
-  }
-
-
-
+  // openDeleteModal() {
+  //   this.modalRef = this.modalService.open(DeleteModalComponent);
+  //   this.modalRef.componentInstance.isActive = true;
+  //   this.modalRef.result.then((result) => {
+  //     console.log("Closed");
+  //   }, (reason) => {
+  //       console.log("Dismissed");
+  //   });
+  // }
 }

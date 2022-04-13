@@ -10,7 +10,7 @@ export function rootReducer(state: AppState, action: Action): AppState {
             return { ...state, activeUser: action.payload };
         }
         case "ADD_NEW_POST": {
-            return { ...state, activeUser: { ...state.activeUser, myPostsIds: [...state.activeUser.myPostsIds, action.payload] }, blog: { ...state.blog, posts: [...state.blog.posts, action.payload] } };
+            return { ...state, activeUser: { ...state.activeUser, myPostsIds: [...state.activeUser.myPostsIds, action.payload.id] }, blog: { ...state.blog, posts: [...state.blog.posts, action.payload] } };
         }
         case "LIKE_POST": {
             return {
@@ -38,6 +38,21 @@ export function rootReducer(state: AppState, action: Action): AppState {
                 ...state,
                 currentEditingPost: action.payload
             };
+        }
+
+        case "DELETE_POST": {
+            return {
+                ...state,
+                activeUser: {
+                    ...state.activeUser,
+                    myPostsIds: state.activeUser.myPostsIds.filter(currentMyPostId => currentMyPostId !== action.payload),
+                    likedPostsIds: state.activeUser.likedPostsIds.filter(currentLikedPostId => currentLikedPostId !== action.payload)
+                },
+                blog: {
+                    ...state.blog,
+                    posts: state.blog.posts.filter(currentPost => currentPost.id !== action.payload)
+                }
+            }
         }
 
         default: {

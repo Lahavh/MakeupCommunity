@@ -8,9 +8,13 @@ import { UserProfileComponent } from './body/components/user-profile/user-profil
 import { AddPostComponent } from './body/components/blog/add-post/add-post.component';
 import { LikedPostsComponent } from './body/components/user-profile/liked-posts/liked-posts.component';
 import { EditPostComponent } from './body/components/blog/edit-post/edit-post.component';
-import { Post } from './body/components/blog/post/post.class';
+import { HomeComponent } from './body/components/home/home.component';
 
 const routes: Routes = [
+  {
+    path: "",
+    component: HomeComponent
+  },
   {
     path: "about",
     component: AboutComponent
@@ -25,8 +29,7 @@ const routes: Routes = [
   },
   {
     path: "edit-post",
-    component: EditPostComponent,
-    data: { post: Post }
+    component: EditPostComponent
   },
   {
     path: "sign-in",

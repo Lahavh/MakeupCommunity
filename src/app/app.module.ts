@@ -21,12 +21,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditPostComponent } from './body/components/blog/edit-post/edit-post.component';
 import { PostTemplateComponent } from './body/components/blog/post-template/post-template.component';
 import { DeleteModalComponent } from './body/components/blog/delete-modal/delete-modal.component';
+import { HomeComponent } from './body/components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppComponent,
     NavbarComponent,
+    HomeComponent,
     AboutComponent,
     BlogComponent,
     PostComponent,

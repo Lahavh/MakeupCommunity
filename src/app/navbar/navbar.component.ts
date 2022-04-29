@@ -1,6 +1,6 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from '../body/components/user-profile/user.class';
 import { AppState } from '../state/app-state';
 

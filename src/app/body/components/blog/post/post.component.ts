@@ -1,12 +1,10 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subscription } from 'rxjs';
 import { AppState } from 'src/app/state/app-state';
 import { User } from '../../user-profile/user.class';
-import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { Post } from './post.class';
 
 @Component({
@@ -20,18 +18,13 @@ export class PostComponent implements OnInit, OnDestroy {
 
   @select(state => state.activeUser) activeUser$: Observable<User>;
 
-  // @ViewChild("deleteModalTemplateRef") deleteModal: DeleteModalComponent;
-
   public isLiked: boolean;
   private subscription: Subscription;
-  // private modalRef: NgbModalRef;
 
   constructor(
     private ngRedux: NgRedux<AppState>,
     private router: Router,
-    private http: HttpClient
-    /*private modalService: NgbModal*/) {
-  }
+    private http: HttpClient) {}
 
   ngOnInit(): void {
     this.subscription = this.activeUser$.subscribe(activeUserFromState => {
@@ -70,14 +63,4 @@ export class PostComponent implements OnInit, OnDestroy {
         this.ngRedux.dispatch({ type: "DELETE_POST", payload: this.post.id });
       });
   }
-
-  // openDeleteModal() {
-  //   this.modalRef = this.modalService.open(DeleteModalComponent);
-  //   this.modalRef.componentInstance.isActive = true;
-  //   this.modalRef.result.then((result) => {
-  //     console.log("Closed");
-  //   }, (reason) => {
-  //       console.log("Dismissed");
-  //   });
-  // }
 }

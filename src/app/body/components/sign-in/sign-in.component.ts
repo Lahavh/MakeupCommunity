@@ -34,7 +34,6 @@ export class SignInComponent implements OnInit {
         payload: activeUser
       });
 
-
       this.http.get("http://localhost:5555/posts").subscribe(posts => {
         const allPosts = posts as Post[];
         this.ngRedux.dispatch({

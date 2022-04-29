@@ -9,9 +9,16 @@ import { User } from '../user-profile/user.class';
 })
 export class SignUpComponent implements OnInit {
 
-  public name: string;
-  public email: string;
-  public password: string;
+  public name = "";
+  public email = "";
+  public emailVerification = "";
+  public password = "";
+  public passwordVerification = "";
+  public nameValidator = true;
+  public emailValidator = true;
+  public emailVerificationValidator = true;
+  public passwordValidator = true;
+  public passwordVerificationValidator = true;
 
   constructor(private http: HttpClient) { }
 
@@ -19,9 +26,48 @@ export class SignUpComponent implements OnInit {
   }
 
   signUpClick() {
-    const userToSave = new User(this.name, this.email, this.password);
-    this.http.post(
-      "http://localhost:5555/user", userToSave).subscribe();
-  }
+    this.checkValications();
 
+    // const userToSave = new User(this.name, this.email, this.password);
+    // this.http.post(
+    //   "http://localhost:5555/user", userToSave).subscribe();
+    }
+
+    checkValications() {
+      if (this.name.length > 2 && !/\d/.test(this.name)) {
+        this.nameValidator = true;
+      }
+      else {
+        this.nameValidator = false;
+      }
+
+      if(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(this.email)) {
+        this.emailValidator = true;
+      }
+      else {
+        this.emailValidator = false;
+      }
+
+      if (this.emailVerification === this.email) {
+        this.emailVerificationValidator = true;
+      }
+      else {
+        this.emailVerificationValidator = false; 
+      }
+
+      if(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/.test(this.password)){
+        this.passwordValidator = true;
+      }
+      else{
+        this.passwordValidator = false;
+      }
+
+      if (this.passwordVerification === this.password) {
+        this.passwordVerificationValidator = true;
+      }
+      else {
+        this.passwordVerificationValidator = false; 
+      }
+
+  }
 }

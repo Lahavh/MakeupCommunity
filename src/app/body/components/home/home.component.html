@@ -1,0 +1,7 @@
+<div class="home-container">
+  <div class="home-details">
+    <img src="src/assets/landing_page_image.jpeg" />
+    <button *ngIf="(activeUser$ | async)" class="btn btn-primary" routerLink="/blog">Go To The Blog</button>
+    <button *ngIf="!(activeUser$ | async)" class="btn btn-primary" routerLink="/sign-up">Sign Up For Free</button>
+  </div>
+</div>

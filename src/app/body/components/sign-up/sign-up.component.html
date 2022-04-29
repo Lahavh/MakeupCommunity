@@ -3,7 +3,7 @@
         <section id="signin-to-digg">
             <div class="row">
                 <div class="col-12 mt-5">
-                    <p>Have an account? <a href="">Sign In</a></p>
+                    <p>Have an account? <a routerLink="/sign-in">Sign In</a></p>
                 </div>
             </div>
         </section>
@@ -14,35 +14,48 @@
                         enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="name" class="form-label">* Name</label>
+
                             <input [(ngModel)]="name" type="text" class="form-control" id="name" name="name" value="">
-                            <span class="text-danger"></span>
+
+                            <p *ngIf="!nameValidator">Name must be more than 2 letters without numbers</p>
                         </div>
+
                         <div class="mb-3">
                             <label for="email" class="form-label">* Email</label>
+
                             <input [(ngModel)]="email" type="email" class="form-control" id="email" name="email" value="">
-                            <span class="text-danger"></span>
+
+                            <p *ngIf="!emailValidator">Invalid email address</p>
+
                         </div>
+
                         <div class="mb-3">
                             <label for="email" class="form-label">* Verify Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="">
-                            <span class="text-danger"></span>
+
+                            <input [(ngModel)]="emailVerification" type="email" class="form-control" id="email" name="email" value="">
+
+                            <p *ngIf="!emailVerificationValidator">Email does not match</p>
                         </div>
+
                         <div class="mb-3">
                             <label for="password" class="form-label">* Password</label>
+
                             <input [(ngModel)]="password" type="password" class="form-control" id="password" name="password">
-                            <span class="text-danger"></span>
+
+                            <p *ngIf="!passwordValidator">Password must be between 6 to 10 characters which contain at least one numeric digit, one uppercase and one lowercase letter</p>
+
                         </div>
+                        
                         <div class="mb-3">
                             <label for="password" class="form-label">* Verify Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                            <span class="text-danger"></span>
+
+                            <input [(ngModel)]="passwordVerification" type="password" class="form-control" id="password" name="password">
+
+                            <p *ngIf="!passwordVerificationValidator">Passwords do not match</p>
+
                         </div>
-                        <div class="mb-3">
-                            <label for="image-profile" class="form-label">Profile Image</label>
-                            <input name="image" class="form-control" type="file" id="image-profile">
-                            <span class="text-danger"></span>
-                        </div>
-                        <button type="button" class="btn btn-primary" (click)="signUpClick()" routerLink="/blog">Sign Up</button>
+
+                        <button type="button" class="btn btn-primary" (click)="signUpClick($event)">Sign Up</button>
                     </form>
                 </div>
             </div>

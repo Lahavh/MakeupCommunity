@@ -21,9 +21,11 @@ export class LikedPostsComponent implements OnInit {
 
   ngOnInit() {
     this.subscription = this.activeUser$.subscribe(activeUserFromState => {
-      this.likedPosts = [];
-      const allPostsFromState = this.ngRedux.getState().blog.posts;
-      activeUserFromState.likedPostsIds.forEach(currentLikedPostId => this.likedPosts.push(allPostsFromState.find(currentPost => currentPost.id === currentLikedPostId)));
+      if (activeUserFromState) {
+        this.likedPosts = [];
+        const allPostsFromState = this.ngRedux.getState().blog.posts;
+        activeUserFromState.likedPostsIds.forEach(currentLikedPostId => this.likedPosts.push(allPostsFromState.find(currentPost => currentPost.id === currentLikedPostId)));
+      }
     });
   }
 

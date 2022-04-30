@@ -5,16 +5,14 @@ export class User {
     name: string;
     email: string;
     password: string;
-    profilePicture: string;
     myPostsIds: string[];
     likedPostsIds: string[];
 
-    constructor(name: string, email: string, password: string, profilePicture = "") {
+    constructor(name: string, email: string, password: string) {
         this.id = uuidv4();
         this.name = name;
         this.email = email;
         this.password = password;
-        this.profilePicture = profilePicture;
         this.myPostsIds = [];
         this.likedPostsIds = [];
     }

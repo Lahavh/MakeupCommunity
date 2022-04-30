@@ -5,16 +5,21 @@
         <div class="col-12 mt-3">
           <div class="card">
             <div class="card-header">
+              <div class="left-card-header-side">
                 <img src="src/assets/users_logo.jpeg" width="40" class="rounded-circle">
-                <h4>{{ postAuthorName }}</h4>
-              <span class="ms-2"></span>
-              <span class="float-end"></span>
+
+                <h4>{{ postAuthor.name }}</h4>
+              </div>
+
+              <div class="right-card-header-side">
+                <h5>{{ post.timestamp }}</h5>
+              </div>
             </div>
             <div class="card-body">
               <h5 class="card-title">{{post.title}}</h5>
               <p class="card-text">{{post.body}}</p>
               <div class="post-buttons">
-                <div class="dropdown float-right mb-2">
+                <div *ngIf="(activeUser$ | async)['id'] === postAuthor['id']" class="dropdown float-right mb-2">
                   <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-h"></i>

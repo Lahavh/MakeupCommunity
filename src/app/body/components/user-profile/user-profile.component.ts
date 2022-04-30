@@ -21,12 +21,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.activeUser$.subscribe(activeUserFromState => {
-      this.myPosts = [];
-      const allPostsFromState = this.ngRedux.getState().blog.posts;
-      activeUserFromState.myPostsIds.forEach(currentMyPostId => this.myPosts.push(allPostsFromState.find(currentPost => currentPost.id === currentMyPostId)));
+      if (activeUserFromState) {
+        this.myPosts = [];
+        const allPostsFromState = this.ngRedux.getState().blog.posts;
+        activeUserFromState.myPostsIds.forEach(currentMyPostId => this.myPosts.push(allPostsFromState.find(currentPost => currentPost.id === currentMyPostId)));
+      }
     });
-
-  
   }
 
   ngOnDestroy() {

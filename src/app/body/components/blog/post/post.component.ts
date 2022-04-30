@@ -19,7 +19,7 @@ export class PostComponent implements OnInit, OnDestroy {
   @select(state => state.activeUser) activeUser$: Observable<User>;
 
   public isLiked: boolean;
-  public postAuthorName = "";
+  public postAuthor = new User("", "", "");
   private subscription: Subscription;
 
   constructor(
@@ -37,7 +37,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
 
     this.http.get("http://localhost:5555/user" + "/:" + this.post.authorId).subscribe(user => {
-      this.postAuthorName = (user as User).name;
+      this.postAuthor = user as User;
     });
   }
 

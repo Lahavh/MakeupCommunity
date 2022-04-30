@@ -1,10 +1,10 @@
 import { Action } from "./app-actions";
-import { AppState } from "./app-state";
+import { AppState, INITIAL_STATE } from "./app-state";
 
 export function rootReducer(state: AppState, action: Action): AppState {
     switch (action.type) {
         case "LOG_OUT": {
-            return { ...state, activeUser: null };
+            return INITIAL_STATE;
         }
         case "SIGN_IN": {
             return { ...state, activeUser: action.payload };

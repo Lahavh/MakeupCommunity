@@ -13,12 +13,12 @@ export class NavbarComponent implements OnInit {
 
   @select(state => state.activeUser) activeUser$: Observable<User>;
 
-  constructor(private ngRedux: NgRedux<AppState>) {}
+  constructor(private ngRedux: NgRedux<AppState>) { }
 
   ngOnInit(): void {
   }
 
   onLogout() {
-    this.ngRedux.dispatch({type: "LOG_OUT"});
+    this.ngRedux.dispatch({ type: "LOG_OUT" });
   }
 }

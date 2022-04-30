@@ -29,8 +29,10 @@ export class PostComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.activeUser$.subscribe(activeUserFromState => {
-      const foundSamePost = activeUserFromState.likedPostsIds.find(currentLikedPostId => currentLikedPostId === this.post.id);
-      this.isLiked = foundSamePost ? true : false;
+      if (activeUserFromState) {
+        const foundSamePost = activeUserFromState.likedPostsIds.find(currentLikedPostId => currentLikedPostId === this.post.id);
+        this.isLiked = foundSamePost ? true : false;
+      }
     });
 
 

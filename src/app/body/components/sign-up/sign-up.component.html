@@ -10,12 +10,11 @@
         <section id="signup-form-content">
             <div class="row">
                 <div class="col-lg-6">
-                    <form id="signup-form" novalidate="novalidate"
-                        enctype="multipart/form-data">
+                    <form id="signup-form" novalidate="novalidate" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="name" class="form-label">* Name</label>
 
-                            <input [(ngModel)]="name" type="text" class="form-control" id="name" name="name" value="">
+                            <input [(ngModel)]="name" type="text" class="form-control" name="name" value="">
 
                             <p *ngIf="!nameValidator">Name must be more than 2 letters without numbers</p>
                         </div>
@@ -23,7 +22,8 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">* Email</label>
 
-                            <input [(ngModel)]="email" type="email" class="form-control" id="email" name="email" value="">
+                            <input [(ngModel)]="email" type="email" class="form-control" name="email"
+                                value="">
 
                             <p *ngIf="!emailValidator">Invalid email address</p>
 
@@ -32,7 +32,8 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">* Verify Email</label>
 
-                            <input [(ngModel)]="emailVerification" type="email" class="form-control" id="email" name="email" value="">
+                            <input [(ngModel)]="emailVerification" type="email" class="form-control"
+                                name="email" value="">
 
                             <p *ngIf="!emailVerificationValidator">Email does not match</p>
                         </div>
@@ -40,22 +41,30 @@
                         <div class="mb-3">
                             <label for="password" class="form-label">* Password</label>
 
-                            <input [(ngModel)]="password" type="password" class="form-control" id="password" name="password">
+                            <input [(ngModel)]="password" type="password" class="form-control"
+                                name="password">
 
-                            <p *ngIf="!passwordValidator">Password must be between 6 to 10 characters which contain at least one numeric digit, one uppercase and one lowercase letter</p>
+                            <p *ngIf="!passwordValidator">Password must be between 6 to 10 characters which contain at
+                                least one numeric digit, one uppercase and one lowercase letter</p>
 
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="password" class="form-label">* Verify Password</label>
 
-                            <input [(ngModel)]="passwordVerification" type="password" class="form-control" id="password" name="password">
+                            <input [(ngModel)]="passwordVerification" type="password" class="form-control"
+                                name="password">
 
                             <p *ngIf="!passwordVerificationValidator">Passwords do not match</p>
 
                         </div>
 
                         <button type="button" class="btn btn-primary" (click)="signUpClick($event)">Sign Up</button>
+
+                        <div *ngIf="signInCompleted" class="sign-up-completed">
+                            <p>You have successfully signed up!</p>
+                            <p>Redirecting to sign in page...</p>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -19,17 +19,23 @@ export class PostComponent implements OnInit, OnDestroy {
   @select(state => state.activeUser) activeUser$: Observable<User>;
 
   public isLiked: boolean;
+  public postAuthorName = "";
   private subscription: Subscription;
 
   constructor(
     private ngRedux: NgRedux<AppState>,
     private router: Router,
-    private http: HttpClient) {}
+    private http: HttpClient) { }
 
   ngOnInit(): void {
     this.subscription = this.activeUser$.subscribe(activeUserFromState => {
       const foundSamePost = activeUserFromState.likedPostsIds.find(currentLikedPostId => currentLikedPostId === this.post.id);
       this.isLiked = foundSamePost ? true : false;
+    });
+
+
+    this.http.get("http://localhost:5555/user" + "/:" + this.post.authorId).subscribe(user => {
+      this.postAuthorName = (user as User).name;
     });
   }
 
